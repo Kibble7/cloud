@@ -19,3 +19,5 @@ The **AZ-900: Microsoft Azure Fundamentals** certification is an entry-level exa
 - Azure pricing, SLA, and lifecycle
 
 📄 To learn more about AZ-900, see documentaion: [AZ-900.md](AZ-900/AZ-900.md)
+📄 Last Minute Guide Az-900, see documentaion: [AZ-last-minute-reference.md](AZ-900/AZ-last-minute-reference.md)
+📄 Mix Notes - Extended Notes-Az-900, see documentaion: [AZ-900-ExtendedNotes.md](AZ-900/AZ-900-ExtendedNotes.md)
