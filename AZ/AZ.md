@@ -116,3 +116,162 @@
 ---
 
 ---
+
+# Create, Configure, and Manage Users & Groups in Microsoft Entra ID
+
+## Understand User Management
+- Each person accessing Azure resources must have a user account in Microsoft Entra ID.  
+- The account stores authentication info and issues access tokens for authorization.  
+- Manage users via **Microsoft Entra admin center** → *Identity → Users*.  
+- You can only work with one directory at a time but can switch using:  
+  - **Directory + Subscription panel**, or  
+  - **Switch directory** button in the toolbar.  
+
+---
+
+## View Users
+- Navigate to **Identity → Users → All Users**.  
+- **User Types:**
+  - **Member:** Internal organization user  
+  - **Guest:** External invited user  
+
+---
+
+## Define User Types
+
+| Type | Description | Source | Example |
+|------|--------------|---------|----------|
+| **Cloud Identity** | Created and managed directly in Entra ID | Microsoft Entra ID | Admin or manually created users |
+| **Directory-Synchronized Identity** | Synced from on-prem Active Directory using Entra Connect | Windows Server AD | Employees managed via on-prem AD |
+| **Guest User** | External collaborator invited from another org or Microsoft account | Invited user | Vendor, contractor, or partner |
+
+**Notes:**
+- Removing a user deletes their Azure access completely.  
+- Guest accounts are ideal for temporary access.  
+- Directory-synced users depend on on-prem AD lifecycle.  
+
+---
+
+## Create a New User
+**Path:** Entra admin center → *Identity → Users → All Users → + New user*  
+
+**Example Values:**
+- User principal name: `KibbleK`  
+- Name: Kibble K  
+- First name: Kibble  
+- Last name: K  
+- Password: Unique password  
+
+✅ Confirm the user appears in the **All Users** list.
+
+---
+
+## Create a Security Group
+**Path:** Entra admin center → *Identity → Groups → All Groups → + New group*  
+
+**Example Configuration:**
+- Group type: **Security**  
+- Group name: **Marketing**  
+- Membership type: **Assigned**  
+- Owners: Admin account  
+- Members: Kibble K  
+
+✅ Verify the **Marketing** group appears in *All Groups*.
+
+---
+
+## Assign Licenses to a Group
+1. Open **Marketing** group → *Manage → Licenses*.  
+2. In **Microsoft 365 Admin Center**, go to *Billing → Licenses*.  
+3. Choose a license → *Groups → + Assign license*.  
+4. Select **Marketing** → *Assign*.  
+
+✅ Message confirms successful license assignment.
+
+**Key Point:**  
+Group-based licensing automatically assigns licenses to all members.
+
+---
+
+## Remove or Restore a User
+### Remove
+- Go to **Users → All Users**.  
+- Select checkbox next to the user (e.g., Kibble K).  
+- Choose **Delete user → OK**.
+
+### Restore
+- Go to **Users → Deleted users**.  
+- Select the user → **Restore user → OK**.  
+- Verify restored user under *All Users*.
+
+**Notes:**
+- **Soft-delete period:** 30 days (recoverable).  
+- **Permanent deletion:** After 30 days, cannot be restored.  
+- **Roles required:** Global Admin, User Admin, Partner Tier-1/2 Support.  
+
+---
+
+## Understand Groups
+- Groups organize users for easier permission management.  
+- Access is granted to all group members at once.  
+- Groups serve as **security boundaries**.  
+- Membership can be **assigned** or **dynamic** (rule-based).
+
+---
+
+## Types of Groups
+
+| Feature | **Security Group** | **Microsoft 365 Group** |
+|----------|--------------------|--------------------------|
+| Purpose | Manage access to resources | Enable collaboration |
+| Includes | Permissions only | Permissions + collaboration tools |
+| External Users | No | Yes |
+| Shared Mailbox/Calendar | No | Yes |
+| Created By | Admin | Users or Admins |
+| Example | Access to Azure VM | Department collaboration in Teams |
+
+---
+
+## Membership Types
+
+| Type | Description | Example Use |
+|-------|-------------|--------------|
+| **Assigned** | Members added manually | Small static teams |
+| **Dynamic** | Members auto-added based on rules (e.g., department) | All users in HR |
+
+**Dynamic Groups:**
+- Automatically include users matching certain attributes.  
+- Updates when user properties change.  
+- Reduces manual work but requires careful rule design.
+
+---
+
+## Create a Microsoft 365 Group
+**Path:** Entra admin center → *Identity → Groups → + New group*  
+
+**Example Configuration:**
+- Group type: **Microsoft 365**  
+- Group name: **Accountant**  
+- Membership type: **Assigned**  
+- Owners: Admin account  
+- Members: Add at least one member  
+
+✅ Verify **Accountant** appears in *All Groups* (refresh if needed).
+
+**Microsoft 365 Group Features:**
+- Shared Outlook mailbox  
+- Shared calendar  
+- SharePoint site  
+- Integration with Teams  
+
+---
+
+## Key Takeaways
+- **User types:** Cloud, Directory-synced, Guest  
+- **Group types:** Security (access) and Microsoft 365 (collaboration)  
+- **Group-based licensing** = auto license assignment  
+- **Deleted users** = recoverable for 30 days (soft-delete)  
+- **Dynamic groups** = membership based on user attributes  
+
+---
+---
