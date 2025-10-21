@@ -2,13 +2,13 @@
 
 ---
 # Manage Identities and Governance in Azure
-## Understand Entra ID
-- Microsoft Entra ID overview  
-- Microsoft Entra ID P1 vs P2 features  
-- Privileged Identity Management (PIM)  
-- Just-in-Time (JIT) Access  
-- Microsoft Entra Domain Services (Entra DS)  
-- Usage of Entra DS for Azure VMs and on-prem PCs  
+
+## Table of Contents
+- [Microsoft Entra ID](#microsoft-entra-id)
+- [Microsoft Entra ID P1 vs P2](#microsoft-entra-id-p1-vs-p2)
+- [Privileged Identity Management (PIM)](#privileged-identity-management-pim)
+- [Just-in-Time (JIT) Access](#just-in-time-jit-access)
+- [Microsoft Entra Domain Services (Entra DS)](#microsoft-entra-domain-services-entra-ds)
 
 ---
 
@@ -113,11 +113,31 @@
 - Main: Add Azure VMs to domain without managing domain controllers  
 - Secondary: Can work for on-prem PCs if VPN/ExpressRoute is set up  
 
+
 ---
 
 ---
 
 # Create, Configure, and Manage Users & Groups in Microsoft Entra ID
+
+## Table of Contents
+- [Understand User Management](#understand-user-management)  
+- [View Users](#view-users)  
+- [Define User Types](#define-user-types)  
+- [Create a New User](#create-a-new-user)  
+- [Create a Security Group](#create-a-security-group)  
+- [Assign Licenses to a Group](#assign-licenses-to-a-group)  
+- [Remove or Restore a User](#remove-or-restore-a-user)  
+- [Understand Groups](#understand-groups)  
+- [Types of Groups](#types-of-groups)  
+- [Membership Types](#membership-types)  
+- [Create a Microsoft 365 Group](#create-a-microsoft-365-group)  
+- [Key Takeaways](#key-takeaways)  
+- [Manage Licenses](#manage-licenses)  
+- [Custom Security Attributes](#custom-security-attributes)  
+- [SCIM (System for Cross-Domain Identity Management)](#scim-system-for-cross-domain-identity-management)  
+
+---
 
 ## Understand User Management
 - Each person accessing Azure resources must have a user account in Microsoft Entra ID.  
@@ -140,7 +160,7 @@
 ## Define User Types
 
 | Type | Description | Source | Example |
-|------|--------------|---------|----------|
+|------|-------------|--------|---------|
 | **Cloud Identity** | Created and managed directly in Entra ID | Microsoft Entra ID | Admin or manually created users |
 | **Directory-Synchronized Identity** | Synced from on-prem Active Directory using Entra Connect | Windows Server AD | Employees managed via on-prem AD |
 | **Guest User** | External collaborator invited from another org or Microsoft account | Invited user | Vendor, contractor, or partner |
@@ -162,7 +182,7 @@
 - Last name: K  
 - Password: Unique password  
 
-✅ Confirm the user appears in the **All Users** list.
+**Note:** Confirm the user appears in the **All Users** list.
 
 ---
 
@@ -176,7 +196,7 @@
 - Owners: Admin account  
 - Members: Kibble K  
 
-✅ Verify the **Marketing** group appears in *All Groups*.
+**Note:** Verify the **Marketing** group appears in *All Groups*.
 
 ---
 
@@ -186,17 +206,15 @@
 3. Choose a license → *Groups → + Assign license*.  
 4. Select **Marketing** → *Assign*.  
 
-✅ Message confirms successful license assignment.
-
-**Key Point:**  
-Group-based licensing automatically assigns licenses to all members.
+**Note:** Message confirms successful license assignment.  
+**Key Point:** Group-based licensing automatically assigns licenses to all members.
 
 ---
 
 ## Remove or Restore a User
 ### Remove
 - Go to **Users → All Users**.  
-- Select checkbox next to the user (e.g., Kibble K).  
+- Select the checkbox next to the user (e.g., Kibble K).  
 - Choose **Delete user → OK**.
 
 ### Restore
@@ -215,14 +233,14 @@ Group-based licensing automatically assigns licenses to all members.
 - Groups organize users for easier permission management.  
 - Access is granted to all group members at once.  
 - Groups serve as **security boundaries**.  
-- Membership can be **assigned** or **dynamic** (rule-based).
+- Membership can be **assigned** or **dynamic** (rule-based).  
 
 ---
 
 ## Types of Groups
 
-| Feature | **Security Group** | **Microsoft 365 Group** |
-|----------|--------------------|--------------------------|
+| Feature | Security Group | Microsoft 365 Group |
+|---------|----------------|-------------------|
 | Purpose | Manage access to resources | Enable collaboration |
 | Includes | Permissions only | Permissions + collaboration tools |
 | External Users | No | Yes |
@@ -235,43 +253,20 @@ Group-based licensing automatically assigns licenses to all members.
 ## Membership Types
 
 | Type | Description | Example Use |
-|-------|-------------|--------------|
+|------|------------|-------------|
 | **Assigned** | Members added manually | Small static teams |
 | **Dynamic** | Members auto-added based on rules (e.g., department) | All users in HR |
 
 **Dynamic Groups:**
 - Automatically include users matching certain attributes.  
 - Updates when user properties change.  
-- Reduces manual work but requires careful rule design.
+- Reduces manual work but requires careful rule design.  
 
 ---
 
 ## Create a Microsoft 365 Group
-**Path:** Entra admin center → *Identity → Groups → + New group*  
+**Path:** Entra admin center → *Identity → Groups → + New group*
 
-**Example Configuration:**
-- Group type: **Microsoft 365**  
-- Group name: **Accountant**  
-- Membership type: **Assigned**  
-- Owners: Admin account  
-- Members: Add at least one member  
-
-✅ Verify **Accountant** appears in *All Groups* (refresh if needed).
-
-**Microsoft 365 Group Features:**
-- Shared Outlook mailbox  
-- Shared calendar  
-- SharePoint site  
-- Integration with Teams  
-
----
-
-## Key Takeaways
-- **User types:** Cloud, Directory-synced, Guest  
-- **Group types:** Security (access) and Microsoft 365 (collaboration)  
-- **Group-based licensing** = auto license assignment  
-- **Deleted users** = recoverable for 30 days (soft-delete)  
-- **Dynamic groups** = membership based on user attributes  
 
 ---
 ---
