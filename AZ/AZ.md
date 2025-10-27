@@ -270,3 +270,152 @@
 
 ---
 ---
+
+# Describe the Core Architectural Components of Azure
+
+## Table of Contents
+- [Azure Accounts & Subscriptions](#azure-accounts--subscriptions)
+- [Azure Physical Infrastructure](#azure-physical-infrastructure)
+- [Regions & Availability Zones](#regions--availability-zones)
+- [Region Pairs](#region-pairs)
+- [Sovereign Regions](#sovereign-regions)
+- [Resources & Resource Groups](#resources--resource-groups)
+- [Azure Subscriptions](#azure-subscriptions)
+- [Management Groups](#management-groups)
+- [Hierarchy Overview](#hierarchy-overview)
+- [Quick Memory Tips](#quick-memory-tips)
+
+---
+
+## Azure Accounts & Subscriptions
+
+- You need an **Azure account** to use Azure services.  
+- A new account includes **one subscription** by default.  
+- Add more subscriptions for dev, test, or departments.  
+- **BYOS (Bring Your Own Subscription)** is used in labs — always clean up to avoid costs.
+
+**Scope Levels:**  
+Azure Account → Subscription → Resource Group → Resources  
+
+---
+
+## Azure Physical Infrastructure
+
+**Azure Infrastructure = Physical + Management**
+
+- **Physical:** Datacenters with servers, power, cooling, and networking.  
+- **Management:** Tools and controls for managing those datacenters.  
+- Datacenters are grouped into **Regions** and **Availability Zones**.
+
+---
+
+## Regions & Availability Zones
+
+### Regions
+- A **region** is an area with one or more connected datacenters.  
+- Choose a region when creating resources.  
+- Some services are **global** (like Entra ID, DNS, Traffic Manager).  
+- Examples: East US, West Europe, Southeast Asia.
+
+### Availability Zones
+- Physically separate datacenters within a region.  
+- Each has independent power, cooling, and networking.  
+- Used for **fault isolation** and **high availability**.  
+- Most regions have **3 Availability Zones**.
+
+| Type | Description | Example |
+|------|--------------|----------|
+| Zonal | Pinned to one zone | VM |
+| Zone-redundant | Replicated across zones | SQL DB, Load Balancer |
+| Non-regional | Global service | Entra ID, DNS |
+
+---
+
+## Region Pairs
+
+- Two regions in the same area, about 300 miles apart.  
+- Provide **backup and disaster recovery**.  
+- Updates happen in one region at a time.  
+- Data stays within the same geography (except Brazil South).  
+
+**Example:** West US ↔ East US  
+
+---
+
+## Sovereign Regions
+
+- Dedicated Azure regions for **government or legal compliance**.  
+- **Examples:**
+  - US Gov regions (Gov Virginia, DoD Central)
+  - China regions (operated by 21Vianet)
+
+---
+
+## Resources & Resource Groups
+
+- **Resource:** The basic Azure component (VM, DB, app, network).  
+- **Resource Group:** A container for related resources.  
+  - A resource belongs to **only one group**.  
+  - Resource groups **cannot be nested**.  
+  - Group actions (delete, permissions) affect all inside.  
+
+**Use Cases:**
+- Temporary test environments → easy cleanup.  
+- Grouping by access or policy → easier control.  
+
+---
+
+## Azure Subscriptions
+
+- A **subscription** is a unit for **billing, management, and access control**.  
+- Linked to a single Azure account (identity in Entra ID).  
+- One account can have multiple subscriptions.  
+
+**Use Cases:**
+- Separate billing per department.  
+- Divide environments: dev, test, production.  
+- Apply different access or policy controls.  
+
+---
+
+## Management Groups
+
+- Container for **multiple subscriptions**.  
+- Used for large-scale **policy and access management**.  
+- Subscriptions **inherit** policies and permissions from their management group.  
+- Can be **nested** up to 6 levels deep.  
+
+**Use Cases:**
+- Apply one policy (like allowed regions) to all subscriptions.  
+- Assign RBAC roles once across all child subscriptions.  
+
+**Limits:**
+- 10,000 management groups per directory.  
+- 6 levels deep (excluding root and subscription).  
+- Each group/subscription has only one parent.  
+
+---
+
+## Hierarchy Overview
+
+Resource → Resource Group → Subscription → Management Group → Directory  
+
+**Example Structure:**  
+- Root Management Group  
+  - IT  
+    - Dev/Test Subscription  
+    - Production Subscription  
+  - Marketing  
+    - Apps Subscription  
+
+---
+
+## Quick Memory Tips
+
+- **Region** → Location  
+- **Zone** → Local backup  
+- **Pair** → Regional backup  
+- **Sovereign** → Government or special use  
+
+---
+---
