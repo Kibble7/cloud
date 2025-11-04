@@ -419,3 +419,235 @@ Resource → Resource Group → Subscription → Management Group → Directory
 
 ---
 ---
+
+# Azure Policy – Full Notes
+
+## Table of Contents
+- [Overview](#overview)
+- [Purpose](#purpose)
+- [Azure Policy Initiatives](#azure-policy-initiatives)
+- [Benefits of Policy Initiatives](#benefits-of-policy-initiatives)
+- [Common Azure Policy Tasks](#common-azure-policy-tasks)
+- [Cloud Adoption Framework](#cloud-adoption-framework)
+- [Cloud Governance](#cloud-governance)
+- [Five Steps of Cloud Governance](#five-steps-of-cloud-governance)
+- [Azure Policy in Cloud Governance](#azure-policy-in-cloud-governance)
+- [Azure Policy Capabilities](#azure-policy-capabilities)
+- [Examples of Governance Actions](#examples-of-governance-actions)
+- [Built-in Policy Areas](#built-in-policy-areas)
+- [Azure Policy Design Principles](#azure-policy-design-principles)
+- [Azure Resource Manager (ARM)](#azure-resource-manager-arm)
+- [Types of Azure Operations](#types-of-azure-operations)
+- [Azure Policy Resources](#azure-policy-resources)
+- [Evaluation of Resources](#evaluation-of-resources)
+- [Policy Enforcement & Best Practices](#policy-enforcement--best-practices)
+- [Summary](#summary)
+
+---
+
+## Overview
+- **Azure Policy:** Governance service to create, assign, and manage policies  
+- Written in JSON and ensures compliance with standards and regulations  
+
+## Purpose
+- Enforce rules and effects on resources  
+- Assess compliance at scale across multiple subscriptions  
+
+## Azure Policy Initiatives
+- Collection of multiple policy definitions for a specific goal  
+- Simplifies centralized policy management  
+
+## Benefits of Policy Initiatives
+- Reduce audit time  
+- Meet regulatory frameworks  
+- Enable cloud guardrails  
+- Automate policy enforcement  
+
+## Common Azure Policy Tasks
+- Assign policies for resource creation restrictions  
+- Create and assign initiatives for compliance monitoring  
+- Fix noncompliant resources  
+- Implement policies organization-wide  
+
+## Cloud Adoption Framework
+- Guides organizations in planning, adopting, governing, and managing Azure  
+- Supports end-to-end adoption with best practices and tools  
+
+## Cloud Governance
+- Ensures security, compliance, cost efficiency, and resource management  
+- Aligns cloud activities with business goals  
+
+## Five Steps of Cloud Governance
+1. Build a governance team  
+2. Assess cloud risks  
+3. Document governance policies  
+4. Enforce policies using automation  
+5. Monitor compliance regularly  
+
+## Azure Policy in Cloud Governance
+- Main governance tool in Azure  
+- Provides centralized compliance dashboard  
+- Works across existing and new resources  
+
+## Azure Policy Capabilities
+- Prevent misconfigurations for new resources  
+- Bulk remediation of existing resources  
+- Automatic remediation for new resources  
+- Custom exceptions and DevOps integration  
+
+## Examples of Governance Actions
+- Restrict regions, enforce geo-replication, limit VM sizes  
+- Enforce tagging, MFA, diagnostic logs, system updates  
+
+## Built-in Policy Areas
+- Storage, Networking, Compute, Security Center, Monitoring  
+
+## Azure Policy Design Principles
+- Balance control with flexibility  
+- Policies should maintain compliance without reducing productivity  
+
+## Azure Resource Manager (ARM)
+- Deployment and management service for Azure  
+- Provides unified management layer across portal, CLI, PowerShell, REST API  
+- Handles authentication, authorization, auditing, and policy enforcement  
+
+## Types of Azure Operations
+- **Control Plane:** Resource management and policy enforcement  
+- **Data Plane:** Actual data operations; Azure Policy can extend to some data plane operations  
+
+## Azure Policy Resources
+- **Definitions:** Policy rules and effects  
+- **Initiatives:** Group policies for management  
+- **Assignments:** Apply policies to scopes  
+- **Exemptions:** Exclude specific resources  
+- **Attestations:** Manual compliance confirmation  
+- **Remediations:** Automatically fix noncompliant resources  
+
+## Evaluation of Resources
+- Triggered by policy assignment, updates, resource changes, or on-demand  
+- Automatic scan every 24 hours; manual scans possible  
+- Compliance states: Compliant, Non-compliant, Error, Conflicting, Protected, Exempted, Unknown  
+
+## Policy Enforcement & Best Practices
+- Use Disabled mode for safe testing  
+- Deploy using rings (test → dev → prod)  
+- Enable Event Grid to react automatically to compliance changes  
+
+## Summary
+- Azure Policy enforces compliance and governance  
+- Hierarchical scope ensures scalability  
+- ARM provides unified control  
+- Greenfield vs Brownfield deployment considerations  
+- Compliance scans maintain consistency across all resources
+
+
+---
+
+---
+
+# Azure RBAC – Quick Notes
+
+## Table of Contents
+- [Overview](#overview)
+- [Purpose](#purpose)
+- [3 Key Parts (Who, What, Where)](#3-key-parts-who-what-where)
+  - [Security Principal (Who)](#security-principal-who)
+  - [Role Definition (What)](#role-definition-what)
+  - [Scope (Where)](#scope-where)
+- [Built-in Roles (Most Common)](#built-in-roles-most-common)
+- [Role Assignment](#role-assignment)
+- [RBAC Model](#rbac-model)
+- [Quick Tip](#quick-tip)
+
+---
+
+## Overview
+
+- **RBAC** = Role-Based Access Control → Controls **who** can do **what** and **where** in Azure.  
+- Works with **Microsoft Entra ID (Azure AD)** for sign-in and identity.  
+- Each **subscription** is linked to **one Entra directory**.  
+
+---
+
+## Purpose
+
+- Stops ex-employees from retaining access.  
+- Gives teams freedom while keeping IT in control.  
+- Enforces **least privilege** — users only get the access they need.  
+
+---
+
+## 3 Key Parts (Who, What, Where)
+
+### Security Principal (Who)
+
+- Represents **who** gets access.  
+- Can be:  
+  - **User**  
+  - **Group**  
+  - **Service Principal**  
+
+---
+
+### Role Definition (What)
+
+- Defines **what actions** are allowed.  
+- Built-in examples:  
+  - **Owner** → Full control + can delegate access  
+  - **Contributor** → Manage resources, cannot assign roles  
+  - **Reader** → View-only access  
+  - **User Access Administrator** → Manage user access  
+
+- Custom roles can be created for special cases.  
+- Structure includes:  
+  - `Actions`: Allowed operations  
+  - `NotActions`: Specific blocked operations  
+  - `DataActions` / `NotDataActions`: Permissions on data-level operations  
+  - `AssignableScopes`: Where the role can apply  
+
+---
+
+### Scope (Where)
+
+- Defines **where** the access applies.  
+- Levels:  
+  - Management Group → Subscription → Resource Group → Resource  
+- Higher-level assignments **inherit** down to lower levels.  
+
+---
+
+## Built-in Roles (Most Common)
+
+- **Owner** → Full control + can delegate access  
+- **Contributor** → Manage everything but cannot assign roles  
+- **Reader** → View-only  
+- **User Access Administrator** → Manage user access  
+
+---
+
+## Role Assignment
+
+- Combines **Who + What + Where** → creates a **role assignment**.  
+- Example:  
+  - Marketing group = Contributor on Sales resource group  
+- Removing the assignment immediately revokes access  
+
+---
+
+## RBAC Model
+
+- **Allow model**: Users can only do what is explicitly allowed  
+- Permissions **add up** from all assigned roles  
+- `NotActions` = explicitly blocked permissions  
+- **Effective permissions** = Actions − NotActions  
+
+---
+
+## Quick Tip
+
+- Remember:  
+  **“RBAC = WHO + WHAT + WHERE = Access”**  
+
+---
+
+---
