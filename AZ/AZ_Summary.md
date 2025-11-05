@@ -30,7 +30,7 @@
 - **Best Practice:** Use groups for access control, dynamic membership for automation, and guest accounts for temporary collaboration  
 
 ---
-## Azure Policy – Quick Summary
+## Azure Policy 
 
 - **Purpose:** Ensures Azure resources comply with organizational standards and regulatory requirements  
 - **Policy Definition:** Written in JSON; defines rules and effects on resources  
@@ -74,3 +74,69 @@
 
 * **Best Practice Tip:** Remember **“RBAC = WHO + WHAT + WHERE = Access”**
 
+---
+
+## Self-Service Password Reset (SSPR)
+
+- Lets users reset their own passwords (no IT help needed)  
+- Works with **Azure**, **Microsoft 365**, and **Entra ID apps**  
+- Saves time, reduces help-desk costs, and improves security  
+
+---
+
+### How It Works
+1. User opens reset page (in their language)  
+2. Enters username + CAPTCHA  
+3. Verifies identity (e.g., Authenticator, email)  
+4. Creates new password  
+5. Gets confirmation email  
+
+---
+
+### Authentication Options
+- ✅ **Authenticator app** (notification or code)  
+- 📧 **Email code**  
+- ☎️ **Phone call/SMS** *(less secure)*  
+- ❌ **Security questions** *(not recommended)*  
+
+---
+
+### Best Practices
+- Use **2+ methods** (Authenticator + Email = best combo)  
+- Avoid **SMS** and **security questions**  
+- Customize page (add logo, language, etc.)  
+
+---
+
+### Admin Accounts
+- Require **two verification methods**  
+- No security questions allowed  
+
+---
+
+### Notifications
+- Users get alerts after password reset  
+- Admins get notified when another admin resets password  
+
+---
+
+### Licensing
+| Action | License Needed |
+|--------|----------------|
+| Change password (signed in) | Free / All editions |
+| Reset forgotten password | Entra ID P1/P2 or Microsoft 365 |
+| Sync with on-prem AD | P1/P2 or Microsoft 365 Apps for Business |
+
+---
+
+### Deployment
+- **Entra Connect:** Syncs on-prem AD  
+- **Cloud Sync:** High availability / multi-domain  
+- Can use both together  
+
+---
+
+### Key Points
+- **SSPR = Self-Service Password Reset**  
+- Reduces IT work + improves productivity  
+- **Recommended setup:** Authenticator + Email  
